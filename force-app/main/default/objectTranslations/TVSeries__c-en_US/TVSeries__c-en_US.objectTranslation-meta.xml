@@ -8,5 +8,16 @@
         <plural>true</plural>
         <value>TVSeries</value>
     </caseValues>
+    <layouts>
+        <layout>TVSeries Layout</layout>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>TV Series detials</section>
+        </sections>
+    </layouts>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>
