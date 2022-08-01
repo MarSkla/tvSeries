@@ -10,5 +10,7 @@
     <tabs>standard-OtherUserProfile</tabs>
     <tabs>standard-CollaborationGroup</tabs>
     <tabs>standard-File</tabs>
-    <tabs>TVSeries__c</tabs>
+    <tabs>TV_Series__c</tabs>
+    <tabs>TV_Series_Season__c</tabs>
+    <tabs>TV_Series_Episode__c</tabs>
 </CustomApplication>

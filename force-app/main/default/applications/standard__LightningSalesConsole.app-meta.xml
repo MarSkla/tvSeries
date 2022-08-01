@@ -20,12 +20,20 @@
     <tabs>standard-Feed</tabs>
     <tabs>standard-CollaborationGroup</tabs>
     <tabs>standard-File</tabs>
-    <tabs>TVSeries__c</tabs>
+    <tabs>TV_Series__c</tabs>
+    <tabs>TV_Series_Season__c</tabs>
+    <tabs>TV_Series_Episode__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>LightningSalesConsole_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
-            <tab>TVSeries__c</tab>
+            <tab>TV_Series_Episode__c</tab>
+        </mappings>
+        <mappings>
+            <tab>TV_Series_Season__c</tab>
+        </mappings>
+        <mappings>
+            <tab>TV_Series__c</tab>
         </mappings>
         <mappings>
             <tab>standard-Account</tab>

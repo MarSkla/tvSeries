@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TV_Series_Season__c</fullName>
+    <externalId>false</externalId>
+    <label>TV Series Season</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>TV_Series_Season__c.TVSeries__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.TV_Series__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>TV_Series_Season__c</referenceTo>
+    <relationshipLabel>TV Series Episodes</relationshipLabel>
+    <relationshipName>TV_Series_Episodes</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
