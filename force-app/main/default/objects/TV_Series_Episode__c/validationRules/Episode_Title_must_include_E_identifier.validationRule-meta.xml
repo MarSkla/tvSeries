@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Episode_Title_must_include_E_identifier</fullName>
+    <active>true</active>
+    <description>Assure episode name include appropriate code describing episode number</description>
+    <errorConditionFormula>!REGEX(Name, &apos;.+E[0-9]&apos;)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Episode name must contains its number in format &quot;E&lt;number&gt;&quot;</errorMessage>
+</ValidationRule>

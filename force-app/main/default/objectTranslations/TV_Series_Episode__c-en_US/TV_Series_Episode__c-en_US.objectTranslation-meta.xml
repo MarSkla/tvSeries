@@ -16,4 +16,8 @@
         </sections>
     </layouts>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Episode_Title_must_include_E_identifier</name>
+    </validationRules>
 </CustomObjectTranslation>
