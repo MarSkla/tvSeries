@@ -1,0 +1,31 @@
+<template>
+    <lightning-accordion allow-multiple-sections-open >
+        <lightning-accordion-section for:each={Series} for:item="show" key={show.Id} name={show.Name} label={show.Name}>
+            <lightning-button-menu slot="actions"
+                                  alternative-text="Show menu"
+                                  icon-size="x-small"
+                                  menu-alignment="right">
+                <lightning-menu-item value="New" label="Menu Item One"></lightning-menu-item>
+                <lightning-menu-item value="Edit" label="Menu Item Two"></lightning-menu-item>
+            </lightning-button-menu>
+            <div >
+                <lightning-record-view-form 
+                record-id={show.Id}
+                object-api-name="TV_Series__c"
+                >
+                <div class="slds-col">
+                    <lightning-output-field field-name="No_of_seasons__c"></lightning-output-field>
+                    <lightning-output-field field-name="No_of_episodes__c"></lightning-output-field>
+                    <lightning-output-field field-name="Age_rating__c"></lightning-output-field>
+                </div>
+                <div class="slds-col">
+                    <lightning-output-field field-name="TV_Series_Story__c"></lightning-output-field>
+                </div>
+                <div class="slds-col">
+                    <lightning-output-field field-name="TVSeries_Logo__c"></lightning-output-field>
+                </div>
+                </lightning-record-view-form>
+            </div>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>
