@@ -1,5 +1,5 @@
 <template>
-    <lightning-accordion allow-multiple-sections-open >
+    <lightning-accordion allow-multiple-sections-open>
         <lightning-accordion-section for:each={Series} for:item="show" key={show.Id} name={show.Name} label={show.Name}>
             <lightning-button-menu slot="actions"
                                   alternative-text="Show menu"
@@ -8,24 +8,47 @@
                 <lightning-menu-item value="New" label="Menu Item One"></lightning-menu-item>
                 <lightning-menu-item value="Edit" label="Menu Item Two"></lightning-menu-item>
             </lightning-button-menu>
+            <!-- sezony -->
+            <div>
+                <!-- <lightning-accordion>  -->
+                    <lightning-accordion-section label="Available seasons">
+                        <!-- <p><b>{season.Name}</b></p> -->
+                        <!-- <lightning-layout-item > -->
+                            <lightning-button for:each={show.TV_Series_Seasons__r} for:item="season" key={season.Id} 
+                                class="slds-var-p-around_medium slds-float_left"
+                                data-id={season.Id}
+                                variant="brand-outline"
+                                label={season.Name}>
+                            </lightning-button>
+                        <!-- </lightning-layout-item> -->
+                    </lightning-accordion-section>
+                    <!-- <p><b>Testowy wpis</b></p> -->
+                <!-- </lightning-accordion> -->
+            </div>
+            <!-- sezony -->
             <div >
                 <lightning-record-view-form 
                 record-id={show.Id}
                 object-api-name="TV_Series__c"
                 >
+                <lightning-accordion-section label="Basic info">
                 <div class="slds-col">
                     <lightning-output-field field-name="No_of_seasons__c"></lightning-output-field>
                     <lightning-output-field field-name="No_of_episodes__c"></lightning-output-field>
                     <lightning-output-field field-name="Age_rating__c"></lightning-output-field>
                 </div>
-                <div class="slds-col">
-                    <lightning-output-field field-name="TV_Series_Story__c"></lightning-output-field>
+                </lightning-accordion-section>
+                <lightning-accordion-section label="Read series story">
+                <div class="slds-col slds-border_bottom">
+                    <lightning-output-field field-name="TV_Series_Story__c" variant="label-hidden"></lightning-output-field>
                 </div>
+                </lightning-accordion-section> 
                 <div class="slds-col">
-                    <lightning-output-field field-name="TVSeries_Logo__c"></lightning-output-field>
+                    <lightning-output-field field-name="TVSeries_Logo__c" variant="label-hidden"></lightning-output-field>
                 </div>
                 </lightning-record-view-form>
             </div>
+
         </lightning-accordion-section>
     </lightning-accordion>
 </template>
