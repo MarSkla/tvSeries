@@ -3,7 +3,6 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Commerce</label>
     <navType>Console</navType>
     <tabs>standard-home</tabs>
@@ -12,20 +11,8 @@
     <tabs>standard-Contact</tabs>
     <tabs>standard-report</tabs>
     <tabs>standard-Order</tabs>
-    <tabs>TV_Series__c</tabs>
-    <tabs>TV_Series_Season__c</tabs>
-    <tabs>TV_Series_Episode__c</tabs>
     <uiType>Lightning</uiType>
     <workspaceConfig>
-        <mappings>
-            <tab>TV_Series_Episode__c</tab>
-        </mappings>
-        <mappings>
-            <tab>TV_Series_Season__c</tab>
-        </mappings>
-        <mappings>
-            <tab>TV_Series__c</tab>
-        </mappings>
         <mappings>
             <tab>standard-Account</tab>
         </mappings>

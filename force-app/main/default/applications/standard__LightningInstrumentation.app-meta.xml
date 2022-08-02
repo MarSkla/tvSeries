@@ -3,12 +3,8 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>LightningInstrumentation</label>
     <navType>Standard</navType>
     <tabs>standard-LightningInstrumentation</tabs>
-    <tabs>TV_Series__c</tabs>
-    <tabs>TV_Series_Season__c</tabs>
-    <tabs>TV_Series_Episode__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

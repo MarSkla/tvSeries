@@ -4,9 +4,5 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <tabs>standard-AppLauncher</tabs>
-    <tabs>TV_Series__c</tabs>
-    <tabs>TV_Series_Season__c</tabs>
-    <tabs>TV_Series_Episode__c</tabs>
 </CustomApplication>

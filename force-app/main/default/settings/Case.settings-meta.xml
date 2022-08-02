@@ -18,18 +18,11 @@
         <enableEmailToCase>false</enableEmailToCase>
     </emailToCase>
     <enableCaseFeed>true</enableCaseFeed>
-    <enableCaseSwarming>false</enableCaseSwarming>
     <enableCollapseEmailThread>true</enableCollapseEmailThread>
     <enableEarlyEscalationRuleTriggers>false</enableEarlyEscalationRuleTriggers>
     <enableEscalateQfiToCaseInternal>false</enableEscalateQfiToCaseInternal>
     <enableEscalateQfiToCaseNetworks>false</enableEscalateQfiToCaseNetworks>
     <enableExtNetworksCaseFeedEnabled>false</enableExtNetworksCaseFeedEnabled>
-    <enableMultiLangSolnSrchCSS>false</enableMultiLangSolnSrchCSS>
-    <enableMultiLangSolnSrchPKB>false</enableMultiLangSolnSrchPKB>
-    <enableMultiLangSolution>false</enableMultiLangSolution>
-    <enableSolutionCategory>false</enableSolutionCategory>
-    <enableSolutionInlineCategory>true</enableSolutionInlineCategory>
-    <enableSolutionShortSummary>true</enableSolutionShortSummary>
     <enableSuggestedSolutions>true</enableSuggestedSolutions>
     <escalateCaseBefore>false</escalateCaseBefore>
     <notifyContactOnCaseComment>false</notifyContactOnCaseComment>

@@ -4,7 +4,6 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Service Console</label>
     <navType>Console</navType>
     <setupExperience>service</setupExperience>
@@ -17,21 +16,9 @@
     <tabs>standard-Incident</tabs>
     <tabs>standard-Problem</tabs>
     <tabs>standard-ChangeRequest</tabs>
-    <tabs>TV_Series__c</tabs>
-    <tabs>TV_Series_Season__c</tabs>
-    <tabs>TV_Series_Episode__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>LightningService_UtilityBar</utilityBar>
     <workspaceConfig>
-        <mappings>
-            <tab>TV_Series_Episode__c</tab>
-        </mappings>
-        <mappings>
-            <tab>TV_Series_Season__c</tab>
-        </mappings>
-        <mappings>
-            <tab>TV_Series__c</tab>
-        </mappings>
         <mappings>
             <tab>standard-Account</tab>
         </mappings>

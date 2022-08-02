@@ -162,7 +162,6 @@
     <defaultLandingTab>standard-home</defaultLandingTab>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <isServiceCloudConsole>true</isServiceCloudConsole>
     <preferences>
         <enableCustomizeMyTabs>false</enableCustomizeMyTabs>
@@ -180,19 +179,7 @@
     <tabs>standard-Case</tabs>
     <tabs>standard-Opportunity</tabs>
     <tabs>standard-Lead</tabs>
-    <tabs>TV_Series__c</tabs>
-    <tabs>TV_Series_Season__c</tabs>
-    <tabs>TV_Series_Episode__c</tabs>
     <workspaceConfig>
-        <mappings>
-            <tab>TV_Series_Episode__c</tab>
-        </mappings>
-        <mappings>
-            <tab>TV_Series_Season__c</tab>
-        </mappings>
-        <mappings>
-            <tab>TV_Series__c</tab>
-        </mappings>
         <mappings>
             <tab>standard-Account</tab>
         </mappings>
