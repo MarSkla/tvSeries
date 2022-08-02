@@ -9,8 +9,11 @@ public with sharing class DataCollector {
     @AuraEnabled
     public static List<TV_Series__c> getSeries(){
         
-        List<TV_Series__c> ownerRecords = [SELECT Id, Name, No_of_seasons__c, No_of_episodes__c, Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c
-                                            FROM TV_Series__c];
+        List<TV_Series__c> ownerRecords = [SELECT Id, Name, No_of_seasons__c, No_of_episodes__c,
+                                             Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c,
+                                             (SELECT Id, Name FROM TV_Series_Seasons__r ORDER BY Name)
+                                             FROM TV_Series__c
+                                             ORDER BY Name];
 
         if(ownerRecords.Size() > 0) {
             return ownerRecords;  
@@ -20,31 +23,31 @@ public with sharing class DataCollector {
           }
     }
 
-    /**
-    * @date 02.08.2022
-    * @Description Public method used to get list of all seasons for TV Series Id passed as parameter
-    * @param outSeries (String type) Id value of TV Series selected
-    * @return a list of child records related to selected TV Series stored in "TV_Series_Season__c" sObject
-    * @return fields included (api names): Id, Name, No_of_episodes__c
-    */
+    // /**
+    // * @date 02.08.2022
+    // * @Description Public method used to get list of all seasons for TV Series Id passed as parameter
+    // * @param outSeries (String type) Id value of TV Series selected
+    // * @return a list of child records related to selected TV Series stored in "TV_Series_Season__c" sObject
+    // * @return fields included (api names): Id, Name, No_of_episodes__c
+    // */
 
-    @AuraEnabled
-    public static List<TV_Series_Season__c> getSeasons(String outSeries) {
+    // @AuraEnabled
+    // public static List<TV_Series_Season__c> getSeasons(String outSeries) {
 
-        if(isAllowedIdType(outSeries, 'TV_Series__c')) {
-            List<TV_Series_Season__c> seasons = [SELECT Id, Name, No_of_episodes__c
-                                            FROM TV_Series_Season__c
-                                            WHERE TVSeries__c =: outSeries]; 
+    //     if(isAllowedIdType(outSeries, 'TV_Series__c')) {
+    //         List<TV_Series_Season__c> seasons = [SELECT Id, Name, No_of_episodes__c
+    //                                         FROM TV_Series_Season__c
+    //                                         WHERE TVSeries__c =: outSeries]; 
 
-            if(seasons.Size() > 0) {
-                return seasons;  
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
+    //         if(seasons.Size() > 0) {
+    //             return seasons;  
+    //         } else {
+    //             return null;
+    //         }
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     /**
     * @date 02.08.2022
