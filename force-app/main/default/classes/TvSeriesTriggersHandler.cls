@@ -1,5 +1,6 @@
 public with sharing class TvSeriesTriggersHandler {
 
+    @future
     public static void sendNotification(String triggerObjects) {
 
         List<TV_Series__c> addedSeries = (List<TV_Series__c>)JSON.deserialize(triggerObjects, List<TV_Series__c>.class);
