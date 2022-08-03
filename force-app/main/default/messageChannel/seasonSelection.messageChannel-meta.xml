@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>seasonSelection</masterLabel>
+    <description>This message is fired when season for defined TV Series is selected.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>Event that is being sent over the channel</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

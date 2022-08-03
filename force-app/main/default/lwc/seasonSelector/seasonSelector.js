@@ -1,4 +1,7 @@
-import { LightningElement, api, track } from 'lwc';
+import { publish, MessageContext} from 'lightning/messageService';
+import SEASON_SELECTION from '@salesforce/messageChannel/seasonSelection__c';
+
+import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSeriesAndSeasons from '@salesforce/apex/DataCollector.getSeriesAndSeasons';
 // import getSeasons from '@salesforce/apex/DataCollector.getSeasons';
@@ -8,6 +11,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
 
     @track Series;
     @track seasonsForSelectedSeries;
+    @wire(MessageContext)
+    messageContext;
 
     
     _seriesCollapsed = false;
@@ -22,11 +27,22 @@ export default class LightningExampleAccordionBasic extends LightningElement {
             this.Series = result
         })
         .catch(error => {
-            {this._toastTitle = 'Ups'};
-            {this._toastMessage = 'There is no data for this app'};
+            this._toastTitle = 'Ups';
+            this._toastMessage = 'There is no data for this app';
             this.showToast();
         })
         this.isLoading = false; 
+    }
+
+    seasonSelect(event){
+        console.log('seasonSelection event handler works')
+        // const id = event.currentTarget.dataset.id;
+        // console.log('Id obtained: ' + id)
+        console.log('event.target.dataset.id: ' + event.target.dataset.id);
+        const season = {recordId : event.target.dataset.id};
+        // console.log('Id obtained: ' + season)
+
+        publish(this.messageContext, SEASON_SELECTION, season);        
     }
 
     // above ok

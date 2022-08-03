@@ -1,8 +1,10 @@
 <template>
 
+    <!-- <p>Episodes will be listed here</p> -->
+
     <!-- <lightning-button onclick={test} label="Run test()"></lightning-button> -->
-    <!-- <lightning-accordion allow-multiple-sections-open>
-        <lightning-accordion-section for:each={episodes} for:item="episode" key={episode.Id} label="test">
+    <lightning-accordion allow-multiple-sections-open>
+        <lightning-accordion-section for:each={episodes} for:item="episode" key={episode.Id} label={episode.Name}>
             <div>
                 <lightning-record-view-form
                     record-id={episode.Id}
@@ -12,16 +14,16 @@
             </div>
 
         </lightning-accordion-section>
-    </lightning-accordion> -->
+    </lightning-accordion>
 
 
-    <lightning-card title="Episodes">
+    <!-- <lightning-card title="Episodes">
         <lightning-layout multiple-rows="true">
             <template for:each={episodes} for:item="episode">
                 <p key={episode.Id}>{episode.Name}</p>
             </template> 
         </lightning-layout>
         
-    </lightning-card>
+    </lightning-card> -->
     
 </template>
