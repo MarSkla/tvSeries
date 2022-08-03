@@ -2,12 +2,13 @@ public with sharing class DataCollector {
 
     /**
     * @date 02.08.2022
-    * @Description Public method used to get list of all TV Series stored in database
-    * @return a list of all records stored in "TV_Series__c" sObject
-    * @return fields included (api names): Id, Name, No_of_seasons__c, No_of_episodes__c, Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c
+    * @Description Public method used to get list of all TV Series with related seasons
+    * @return a list of all records stored in "TV_Series__c" and "TV_Series_Seasons__c" objects
+    * @return "TV_Series__c" fields returned (api names): Id, Name, No_of_seasons__c, No_of_episodes__c, Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c
+    * @return "TV_Series_Seasons__c" fields returned (api names): Id, Name
     */
     @AuraEnabled
-    public static List<TV_Series__c> getSeries(){
+    public static List<TV_Series__c> getSeriesAndSeasons(){
         
         List<TV_Series__c> ownerRecords = [SELECT Id, Name, No_of_seasons__c, No_of_episodes__c,
                                              Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c,
@@ -57,23 +58,49 @@ public with sharing class DataCollector {
     * @return field included (api names): Id, Name, Episode_Story__c
     */
 
+// TEST
+    @AuraEnabled
+    public static List<TV_Series_Episode__c> getEpisodes2(){
+        System.debug('getEpisodes called');
+        List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
+        FROM TV_Series_Episode__c
+        WHERE TV_Series_Season__c ='a017Q00000wDEtBQAW'];
+        System.debug('episodes.size(): ' + episodes.size());
+
+        return episodes;
+
+    }
+// TEST
+
+// !!!!!!!!!!!!!! wyłączone do testu
     @AuraEnabled
     public static List<TV_Series_Episode__c> getEpisodes(String outSeason){
 
+        System.debug('getEpisodes called');
+        System.debug('outSeason: ' + outSeason);
+
         if(isAllowedIdType(outSeason, 'TV_Series_Season__c')) {
-            List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c
+            System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
+            List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
                                 FROM TV_Series_Episode__c
                                 WHERE TV_Series_Season__c =: outSeason];
 
+            System.debug('episodes.size(): '+ episodes.size());
+
             if(episodes.Size() > 0) {
+                System.debug('episodes.size() > 0 TRUE');
+                System.debug('episodes includes: ' + episodes);
                 return episodes;  
             } else {
+                System.debug('episodes.size() > 0 FALSE');
+
                 return null;
             }
         } else {
             return null;
         }
     }
+// !!!!!!!!!!!!!! wyłączone do testu
 
 
     /**

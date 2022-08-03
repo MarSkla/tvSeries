@@ -1,8 +1,8 @@
 import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import getSeries from '@salesforce/apex/DataCollector.getSeries';
+import getSeriesAndSeasons from '@salesforce/apex/DataCollector.getSeriesAndSeasons';
 // import getSeasons from '@salesforce/apex/DataCollector.getSeasons';
-import getEpisodes from '@salesforce/apex/DataCollector.getEpisodes';
+// import getEpisodes from '@salesforce/apex/DataCollector.getEpisodes';
 
 export default class LightningExampleAccordionBasic extends LightningElement {
 
@@ -17,7 +17,7 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     constructor(){
         super();
         // this.isLoading = true;
-        getSeries()
+        getSeriesAndSeasons()
         .then(result => {
             this.Series = result
         })
