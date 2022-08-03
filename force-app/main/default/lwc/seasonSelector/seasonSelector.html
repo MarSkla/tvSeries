@@ -52,4 +52,9 @@
 
         </lightning-accordion-section>
     </lightning-accordion>
+    <template if:true={isLoading}>
+        <div>
+            <lightning-spinner alternative-text="loading data..." variant="brand"></lightning-spinner>
+        </div>
+    </template>
 </template>

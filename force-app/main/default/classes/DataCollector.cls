@@ -7,6 +7,7 @@ public with sharing class DataCollector {
     * @return "TV_Series__c" fields returned (api names): Id, Name, No_of_seasons__c, No_of_episodes__c, Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c
     * @return "TV_Series_Seasons__c" fields returned (api names): Id, Name
     */
+
     @AuraEnabled
     public static List<TV_Series__c> getSeriesAndSeasons(){
         
@@ -24,31 +25,6 @@ public with sharing class DataCollector {
           }
     }
 
-    // /**
-    // * @date 02.08.2022
-    // * @Description Public method used to get list of all seasons for TV Series Id passed as parameter
-    // * @param outSeries (String type) Id value of TV Series selected
-    // * @return a list of child records related to selected TV Series stored in "TV_Series_Season__c" sObject
-    // * @return fields included (api names): Id, Name, No_of_episodes__c
-    // */
-
-    // @AuraEnabled
-    // public static List<TV_Series_Season__c> getSeasons(String outSeries) {
-
-    //     if(isAllowedIdType(outSeries, 'TV_Series__c')) {
-    //         List<TV_Series_Season__c> seasons = [SELECT Id, Name, No_of_episodes__c
-    //                                         FROM TV_Series_Season__c
-    //                                         WHERE TVSeries__c =: outSeries]; 
-
-    //         if(seasons.Size() > 0) {
-    //             return seasons;  
-    //         } else {
-    //             return null;
-    //         }
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     /**
     * @date 02.08.2022
@@ -58,41 +34,29 @@ public with sharing class DataCollector {
     * @return field included (api names): Id, Name, Episode_Story__c
     */
 
-// TEST
-    @AuraEnabled
-    public static List<TV_Series_Episode__c> getEpisodes2(){
-        System.debug('getEpisodes called');
-        List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
-        FROM TV_Series_Episode__c
-        WHERE TV_Series_Season__c ='a017Q00000wDEtBQAW'];
-        System.debug('episodes.size(): ' + episodes.size());
-
-        return episodes;
-
-    }
-// TEST
-
-// !!!!!!!!!!!!!! wyłączone do testu
     @AuraEnabled
     public static List<TV_Series_Episode__c> getEpisodes(String outSeason){
 
-        System.debug('getEpisodes called');
-        System.debug('outSeason: ' + outSeason);
+        // System.debug('getEpisodes called');
+        // System.debug('outSeason: ' + outSeason);
 
         if(isAllowedIdType(outSeason, 'TV_Series_Season__c')) {
-            System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
+            // System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
             List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
                                 FROM TV_Series_Episode__c
                                 WHERE TV_Series_Season__c =: outSeason];
 
-            System.debug('episodes.size(): '+ episodes.size());
+            // System.debug('episodes.size(): '+ episodes.size());
 
-            if(episodes.Size() > 0) {
-                System.debug('episodes.size() > 0 TRUE');
-                System.debug('episodes includes: ' + episodes);
+            if(episodes.Size() > 0 && episodes.size() <=100) {
+                // System.debug('episodes.size() > 0 TRUE');
+                // System.debug('episodes includes: ' + episodes);
                 return episodes;  
-            } else {
-                System.debug('episodes.size() > 0 FALSE');
+            } if(episodes > 100) {
+                
+            }
+            else {
+                // System.debug('episodes.size() > 0 FALSE');
 
                 return null;
             }
@@ -100,7 +64,6 @@ public with sharing class DataCollector {
             return null;
         }
     }
-// !!!!!!!!!!!!!! wyłączone do testu
 
 
     /**

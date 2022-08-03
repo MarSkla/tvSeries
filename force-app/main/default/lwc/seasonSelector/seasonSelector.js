@@ -4,8 +4,6 @@ import SEASON_SELECTION from '@salesforce/messageChannel/seasonSelection__c';
 import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSeriesAndSeasons from '@salesforce/apex/DataCollector.getSeriesAndSeasons';
-// import getSeasons from '@salesforce/apex/DataCollector.getSeasons';
-// import getEpisodes from '@salesforce/apex/DataCollector.getEpisodes';
 
 export default class LightningExampleAccordionBasic extends LightningElement {
 
@@ -14,6 +12,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     @wire(MessageContext)
     messageContext;
 
+    @api isLoading = false;
+
     
     _seriesCollapsed = false;
     _toastTitle;
@@ -21,7 +21,7 @@ export default class LightningExampleAccordionBasic extends LightningElement {
 
     constructor(){
         super();
-        // this.isLoading = true;
+        this.isLoading = true;
         getSeriesAndSeasons()
         .then(result => {
             this.Series = result
@@ -35,14 +35,18 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     }
 
     seasonSelect(event){
-        console.log('seasonSelection event handler works')
+        this.isLoading = true;
+
+        // console.log('seasonSelection event handler works')
         // const id = event.currentTarget.dataset.id;
         // console.log('Id obtained: ' + id)
-        console.log('event.target.dataset.id: ' + event.target.dataset.id);
+        // console.log('event.target.dataset.id: ' + event.target.dataset.id);
         const season = {recordId : event.target.dataset.id};
         // console.log('Id obtained: ' + season)
 
-        publish(this.messageContext, SEASON_SELECTION, season);        
+        publish(this.messageContext, SEASON_SELECTION, season);    
+        this.isLoading = false; 
+
     }
 
     // above ok
