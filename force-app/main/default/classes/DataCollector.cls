@@ -44,7 +44,8 @@ public with sharing class DataCollector {
             System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
             List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
                                 FROM TV_Series_Episode__c
-                                WHERE TV_Series_Season__c =: outSeason];
+                                WHERE TV_Series_Season__c =: outSeason
+                                ORDER BY Name];
 
             System.debug('episodes.size(): '+ episodes.size());
 
