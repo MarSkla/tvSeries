@@ -3,6 +3,17 @@
 # For useful gitignore templates see: https://github.com/github/gitignore
 
 manifest/package.xml
+force-app/main/default/appMenus/AppSwitcher
+force-app/main/default/applications/
+force-app/main/default/cleanDataServices/
+force-app/main/default/flexipages/
+force-app/main/default/layouts/
+force-app/main/default/objects/
+force-app/main/default/profiles/
+force-app/main/default/settings/
+force-app/main/default/workflows/
+
+
 
 # Salesforce cache
 .sf/
