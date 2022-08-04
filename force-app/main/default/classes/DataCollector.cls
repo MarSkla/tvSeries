@@ -37,26 +37,23 @@ public with sharing class DataCollector {
     @AuraEnabled
     public static List<TV_Series_Episode__c> getEpisodes(String outSeason){
 
-        // System.debug('getEpisodes called');
-        // System.debug('outSeason: ' + outSeason);
+        System.debug('getEpisodes called');
+        System.debug('outSeason: ' + outSeason);
 
         if(isAllowedIdType(outSeason, 'TV_Series_Season__c')) {
-            // System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
+            System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
             List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
                                 FROM TV_Series_Episode__c
                                 WHERE TV_Series_Season__c =: outSeason];
 
-            // System.debug('episodes.size(): '+ episodes.size());
+            System.debug('episodes.size(): '+ episodes.size());
 
-            if(episodes.Size() > 0 && episodes.size() <=100) {
-                // System.debug('episodes.size() > 0 TRUE');
-                // System.debug('episodes includes: ' + episodes);
+            if(episodes.Size() > 0) {
+                System.debug('episodes.size() > 0 TRUE');
+                System.debug('episodes includes: ' + episodes);
                 return episodes;  
-            } if(episodes > 100) {
-                
-            }
-            else {
-                // System.debug('episodes.size() > 0 FALSE');
+            } else {
+                System.debug('episodes.size() > 0 FALSE');
 
                 return null;
             }

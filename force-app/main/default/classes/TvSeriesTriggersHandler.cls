@@ -1,11 +1,10 @@
 public with sharing class TvSeriesTriggersHandler {
 
-    @future
     public static void sendNotification(String triggerObjects) {
 
         List<TV_Series__c> addedSeries = (List<TV_Series__c>)JSON.deserialize(triggerObjects, List<TV_Series__c>.class);
 
-        String mailContent = 'TV Series added ' + Date.today() + ' : \n';
+        String mailContent = 'TV Series added: \n';
 
         for (Integer i=0; i < addedSeries.size(); i++) {
             mailContent += (i+1) + '. ' + '"' + addedSeries[i] + '"' + ' by ' + addedSeries[i].CreatedById + '\n';

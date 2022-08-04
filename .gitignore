@@ -3,7 +3,7 @@
 # For useful gitignore templates see: https://github.com/github/gitignore
 
 manifest/package.xml
-force-app/main/default/appMenus/AppSwitcher
+force-app/main/default/appMenus/
 force-app/main/default/applications/
 force-app/main/default/cleanDataServices/
 force-app/main/default/flexipages/
