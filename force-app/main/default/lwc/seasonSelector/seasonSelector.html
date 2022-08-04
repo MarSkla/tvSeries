@@ -1,12 +1,56 @@
 <template>
+
+    <section if:true={isMEditModalOpen} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Update TV Series Data</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-2">
+                <lightning-record-edit-form
+                        object-api-name="TV_Series__c"
+                        record-id={retrievedRecordToEdit}>
+                        <!-- <label class="slds-form-element__label slds-align_absolute-center" style="min-width: max-content" for="checkbox-interested"></label> -->
+                        <lightning-output-field id="modal-series-output-name" class="slds-form-element__label" field-name="Name"></lightning-output-field>
+                        <lightning-input-field id="modal-series-name" class="slds-form-element__label" field-name="Name"></lightning-input-field>
+                        <lightning-input-field id="modal-series-story" class="slds-form-element__label" field-name="TV_Series_Story__c"></lightning-input-field>
+                        <lightning-input-field id="modal-series-review" class="slds-form-element__label" field-name="Series_review__c"></lightning-input-field>
+                        <!-- <lightning-input-field id="modal-series-logo" class="slds-form-element__label" field-name="TVSeries_Logo__c"></lightning-input-field> -->
+                        <div class="slds-col slds-size_full slds-align_absolute-center slds-var-p-around_medium slds-border_bottom">
+                        <lightning-button variant="nautral" type="submit" label="Cancel" onclick={handleCancel}></lightning-button>
+                        <lightning-button variant="success" type="submit" label="Update" onclick={closeEditModal}></lightning-button>
+                        </div>
+                </lightning-record-edit-form>
+            </div>
+            <!-- <div class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={closeEditModal}>Submit</button>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- modal -->
+    <!-- <section if:false={isWelcomeModalClosed} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Are you ready...? :-)</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <img src={carLogo}>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={closeWelcomeModal}>YESSS</button>
+            </div>
+        </div>
+    </section> -->
+    <!-- modal -->
+
     <lightning-accordion allow-multiple-sections-open>
-        <lightning-accordion-section for:each={Series} for:item="show" key={show.Id} name={show.Name} label={show.Name}>
+        <lightning-accordion-section for:each={Series} for:item="show" key={show.Id} label={show.Name}>
             <lightning-button-menu slot="actions"
                                   alternative-text="Show menu"
                                   icon-size="x-small"
                                   menu-alignment="right">
-                <lightning-menu-item value="New" label="Menu Item One"></lightning-menu-item>
-                <lightning-menu-item value="Edit" label="Menu Item Two"></lightning-menu-item>
+                <lightning-menu-item label="Remove TV Series" data-id={show.Id} onclick={deleteRecord}></lightning-menu-item>
+                <lightning-menu-item label="Edit series" data-id={show.Id} onclick={editRecord} ></lightning-menu-item>
             </lightning-button-menu>
             <!-- sezony -->
             <div>
