@@ -43,7 +43,7 @@
     </section> -->
     <!-- modal -->
 
-    <lightning-accordion allow-multiple-sections-open>
+    <lightning-accordion allow-multiple-sections-open class="slds-scrollable_y" style="height:35rem">
         <lightning-accordion-section for:each={Series} for:item="show" key={show.Id} label={show.Name}>
             <lightning-button-menu slot="actions"
                                   alternative-text="Show menu"

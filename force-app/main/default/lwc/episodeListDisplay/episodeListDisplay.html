@@ -6,7 +6,7 @@
         </div>
     </template>   
 
-    <lightning-accordion allow-multiple-sections-open>
+    <lightning-accordion allow-multiple-sections-open class="slds-scrollable_y" style="height:35rem">
         <lightning-accordion-section for:each={episodes} for:item="episode" key={episode.Id} label={episode.Name}>
             <div>
                 <lightning-record-view-form
