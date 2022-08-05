@@ -6,17 +6,20 @@
         </div>
     </template>   
 
-    <lightning-accordion allow-multiple-sections-open class="slds-scrollable_y" style="height:35rem">
-        <lightning-accordion-section for:each={episodes} for:item="episode" key={episode.Id} label={episode.Name}>
-            <div>
-                <lightning-record-view-form
-                    record-id={episode.Id}
-                    object-api-name="TV_Series_Episode__c">
-                    <lightning-output-field field-name="Episode_info__c"></lightning-output-field>
-                </lightning-record-view-form>
-            </div>
+    <lightning-card>
+        <lightning-accordion allow-multiple-sections-open class="slds-scrollable_y" style="height:35rem">
+            <lightning-accordion-section for:each={episodes} for:item="episode" key={episode.Id} label={episode.Name}>
+                <div>
+                    <lightning-record-view-form
+                        record-id={episode.Id}
+                        object-api-name="TV_Series_Episode__c">
+                        <lightning-output-field field-name="Episode_info__c"></lightning-output-field>
+                    </lightning-record-view-form>
+                </div>
+    
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
 
-        </lightning-accordion-section>
-    </lightning-accordion>
     
 </template>

@@ -36,6 +36,10 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     // @api recordId;
 
     @api recordToEditId;
+
+// message modal
+    @api isMessageMOdalOpen = false;
+    @api modalMessage;
     
     // _seriesCollapsed = false;
 // toast
@@ -51,9 +55,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
             this.Series = result
         })
         .catch(error => {
-            this._toastTitle = 'Ups';
-            this._toastMessage = 'There is no data for this app';
-            this.showToast();
+            this.modalMessage = 'There is no data for this app'
+            this.isMessageMOdalOpen = true;
         })
         this.isLoading = false; 
     }
@@ -69,7 +72,7 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         // console.log('Id obtained: ' + season)
 
         publish(this.messageContext, SEASON_SELECTION, season) 
-        this.isLoading = false
+        // this.isLoading = false
 
     }
 
@@ -236,19 +239,16 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     
     // below ok
 
-    showToast() {
-        console.log('entered showToast');
-        const event = new ShowToastEvent({
-            title: this._toastTitle,
-            message: this._toastMessage,
-            variant: this._tastvariant,
-        });
-        this.dispatchEvent(event);
-    }
+    // showToast() {
+    //     console.log('entered showToast');
+    //     const event = new ShowToastEvent({
+    //         title: this._toastTitle,
+    //         message: this._toastMessage,
+    //         variant: this._tastvariant,
+    //     });
+    //     this.dispatchEvent(event);
+    // }
 
-    @api isMessageMOdalOpen = false;
-    // @api modalHeader;
-    @api modalMessage;
 
     closeMessageModal(){
         this.isMessageMOdalOpen = false;
