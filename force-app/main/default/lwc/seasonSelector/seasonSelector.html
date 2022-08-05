@@ -50,7 +50,7 @@
 
     <!-- ADD EPISODE start -->
 
-    <section if:true={isAddEpisodeModalOpen} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02" class="slds-modal slds-fade-in-open slds-modal_small">
+    <!-- <section if:true={isAddEpisodeModalOpen} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02" class="slds-modal slds-fade-in-open slds-modal_small">
         <div class="slds-modal__container">
             <div class="slds-modal__header">
                 <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Add Episode</h1>
@@ -61,7 +61,7 @@
                     layout-type="Full" 
                     mode="edit">
                     <lightning-output-field field-name="TV Series"></lightning-output-field>
-                </lightning-record-form>
+                </lightning-record-form> -->
                 <!-- <lightning-record-edit-form
                         object-api-name="TV_Series_Episode__c"
                         record-id={retrievedRecordToEdit}>
@@ -74,9 +74,9 @@
                             <lightning-button variant="success" type="submit" label="Add" onclick={closeEditModal}></lightning-button>
                         </div>
                 </lightning-record-edit-form> -->
-            </div>
+            <!-- </div>
         </div>
-    </section>
+    </section> -->
 
 
     <!-- ADD EPISODE end -->
@@ -103,8 +103,8 @@
                                   alternative-text="Show menu"
                                   icon-size="x-small"
                                   menu-alignment="right">
-                <lightning-menu-item label="Add Series review" data-id={show.Id} onclick={addSeriesReview} ></lightning-menu-item>
                 <lightning-menu-item label="Edit TV Series" data-id={show.Id} onclick={editRecord} ></lightning-menu-item>
+                <lightning-menu-item label="Add TV Series review" data-id={show.Id} onclick={addSeriesReview} ></lightning-menu-item>
                 <lightning-menu-item label="Remove TV Series" data-id={show.Id} onclick={deleteRecord}></lightning-menu-item>
             </lightning-button-menu>
             <!-- sezony -->
@@ -120,13 +120,13 @@
                                             label={season.Name}
                                             onclick={seasonSelect}>
                             </lightning-button>
-                            <lightning-button-menu slot="actions"
+                            <!-- <lightning-button-menu slot="actions"
                                                     alternative-text="Show menu"
                                                     icon-size="x-small"
                                                     menu-alignment="right">
 
                                 <lightning-menu-item label="Add Episode" data-id={show.Id} onclick={addEpisode}></lightning-menu-item>
-                            </lightning-button-menu>
+                            </lightning-button-menu> -->
                         <!-- </lightning-layout-item> -->
                     </lightning-accordion-section>
                     <!-- <p><b>Testowy wpis</b></p> -->
@@ -164,5 +164,30 @@
         <div>
             <lightning-spinner alternative-text="loading data..." variant="brand"></lightning-spinner>
         </div>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
     </template>
+    <!-- messages -->
+    <section if:true={isMessageMOdalOpen}>
+
+        <section  role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeMessageModal}>
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <!-- <span class="slds-assistive-text">Cancel and close</span> -->
+              </button>
+              <!-- <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Message Variable</h1>
+              </div> -->
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p id="modal-canceled" style="text-align : center">{modalMessage}</p>
+              </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </section>
+
+    <!-- messages -->
+
 </template>

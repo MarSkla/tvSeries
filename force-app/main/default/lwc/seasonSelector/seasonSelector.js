@@ -139,6 +139,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         }
         this.closeEditModal();
         this.isLoading=false;
+        this.modalMessage = 'Action cancelled'
+        this.isMessageMOdalOpen = true;
      }
 
 
@@ -148,6 +150,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         // this._tastvariant='warning'
         // this.showToast()
         this.isLoading=false;
+        this.modalMessage = 'TV Series fields updated'
+        this.isMessageMOdalOpen = true;
     }
 
     handleCancelinAddReviewModal(event){
@@ -162,6 +166,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         }
         this.closeAddReviewModal();
         this.isLoading=false;
+        this.modalMessage = 'Action cancelled'
+        this.isMessageMOdalOpen = true;
      }
 
 
@@ -169,6 +175,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         this.isLoading=true;
         this.isReviewModalOpen = false;
         this.isLoading=false;
+        this.modalMessage = 'TV Series review field updated'
+        this.isMessageMOdalOpen = true;
     }
 
     deleteRecord(event){
@@ -236,8 +244,15 @@ export default class LightningExampleAccordionBasic extends LightningElement {
             variant: this._tastvariant,
         });
         this.dispatchEvent(event);
-
-        
-        
     }
+
+    @api isMessageMOdalOpen = false;
+    // @api modalHeader;
+    @api modalMessage;
+
+    closeMessageModal(){
+        this.isMessageMOdalOpen = false;
+    }
+
+ 
 }
