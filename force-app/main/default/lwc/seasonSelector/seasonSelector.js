@@ -7,13 +7,13 @@ import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSeriesAndSeasons from '@salesforce/apex/DataCollector.getSeriesAndSeasons';
 import removeTvSeries from '@salesforce/apex/DataModifier.removeTvSeries';
-import getTVSeriesToEdit from '@salesforce/apex/DataModifier.getTVSeriesToEdit';
+// import getTVSeriesToEdit from '@salesforce/apex/DataModifier.getTVSeriesToEdit';
 
 
 export default class LightningExampleAccordionBasic extends LightningElement {
 
     @track Series;
-    @track seasonsForSelectedSeries;
+    // @track seasonsForSelectedSeries;
 
 // communication
     @wire(MessageContext)
@@ -22,12 +22,16 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     // serialId;
 
     @api retrievedRecordToEdit;
+    @api retrievedRecordToAddReview;
+    @api seasonToAddEpisode;
 // spiner
     @api isLoading = false;
 
 // actions on records
     @api isDeleted = false;
     @api isMEditModalOpen = false;
+    @api isAddEpisodeModalOpen = false;
+    @api isReviewModalOpen = false;
 
     // @api recordId;
 
@@ -69,18 +73,21 @@ export default class LightningExampleAccordionBasic extends LightningElement {
 
     }
 
+
+
     editRecord(event){
         this.isLoading=true;
         console.log('entered editRecord');
         console.log('this.isMEditModalOpen: ' + this.isMEditModalOpen);
         const recordToEditId = event.currentTarget.dataset.id;
-        // const recordToEditId = event.currentTarget.dataset.id;
+        // this.retrievedRecordToEdit = event.currentTarget.dataset.id;
         console.log('editRecord ID obtained: ' + recordToEditId);
         this.retrievedRecordToEdit = recordToEditId;
         console.log('retrievedRecordToEdit: ' + this.retrievedRecordToEdit);
         this.isMEditModalOpen = true;
         this.isLoading=false;
         console.log('this.isMEditModalOpen: ' + this.isMEditModalOpen);
+        this.isLoading=false;
 
         // getTVSeriesToEdit({outSeriesToEditId : recordToEditId})
         // .then(result => {
@@ -93,9 +100,35 @@ export default class LightningExampleAccordionBasic extends LightningElement {
             
         // })
         // this.recordId = event.currentTarget.dataset.id;
+    } 
+
+    addSeriesReview(event){
+        this.isLoading=true;
+        console.log('entered addSeriesReview');
+        console.log('this.isReviewModalOpen: ' + this.isReviewModalOpen);
+        const seriesId = event.currentTarget.dataset.id;
+        // this.retrievedRecordToEdit = event.currentTarget.dataset.id;
+        console.log('editRecord ID obtained: ' + seriesId);
+        this.retrievedRecordToAddReview = seriesId;
+        console.log('retrievedRecordToAddReview: ' + this.retrievedRecordToAddReview);
+        this.isReviewModalOpen = true;
+        this.isLoading=false;
+        console.log('this.isReviewModalOpen: ' + this.isMEditModalOpen);
     }
 
-    handleCancel(event){
+    addEpisode(event){
+        this.isLoading=true;
+        const id = event.currentTarget.dataset.id
+        console.log('passed show.id: ' + id);
+        this.isAddEpisodeModalOpen = true;
+        this.seasonToAddEpisode = id;
+        console.log('seasonToAddEpisode' + this.seasonToAddEpisode);
+        console.log(('in Series variable: ' + this.Series));
+        this.isLoading=false;
+    }
+
+    handleCancelinEditModal(event){
+        this.isLoading=true;
         const inputFields = this.template.querySelectorAll(
             'lightning-input-field'
         );
@@ -105,13 +138,37 @@ export default class LightningExampleAccordionBasic extends LightningElement {
             });
         }
         this.closeEditModal();
+        this.isLoading=false;
      }
 
 
     closeEditModal(event){
-        this.isMEditModalOpen = false;
-        this._tastvariant='warning'
-        this.showToast()
+        this.isLoading=true;
+        this.isMEditModalOpen = false;       
+        // this._tastvariant='warning'
+        // this.showToast()
+        this.isLoading=false;
+    }
+
+    handleCancelinAddReviewModal(event){
+        this.isLoading=true;
+        const inputFields = this.template.querySelectorAll(
+            'lightning-input-field'
+        );
+        if (inputFields) {
+            inputFields.forEach(field => {
+                field.reset();
+            });
+        }
+        this.closeAddReviewModal();
+        this.isLoading=false;
+     }
+
+
+    closeAddReviewModal(event){
+        this.isLoading=true;
+        this.isReviewModalOpen = false;
+        this.isLoading=false;
     }
 
     deleteRecord(event){

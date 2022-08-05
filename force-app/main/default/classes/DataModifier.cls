@@ -7,12 +7,12 @@ public with sharing class DataModifier {
             
             System.debug('removeTvSeries called with id: ' + seriesId);
             
-            // TV_Series__c recordToRemove = [SELECT ID FROM TV_Series__c WHERE Id =: seriesId];
+            TV_Series__c recordToRemove = [SELECT ID FROM TV_Series__c WHERE Id =: seriesId];
     
-            // System.debug('recordToRemove = ' +  recordToRemove.Id);
+            System.debug('recordToRemove = ' +  recordToRemove.Id);
     
             try{
-                // delete recordToRemove;
+                delete recordToRemove;
                 System.debug('record deleted');
                 return true;
             } catch (DmlException e) {
@@ -25,26 +25,27 @@ public with sharing class DataModifier {
         } 
     }
 
-    @AuraEnabled
-    // public static TV_Series__c getTVSeriesToEdit(String outSeriesToEditId){
-    public static Boolean getTVSeriesToEdit(String outSeriesToEditId){
 
-        System.debug('getTVSeriesToEdit called with id: ' + outSeriesToEditId);
+    // @AuraEnabled
+    // // public static TV_Series__c getTVSeriesToEdit(String outSeriesToEditId){
+    // public static Boolean getTVSeriesToEdit(String outSeriesToEditId){
 
-        if(isAllowedIdType(outSeriesToEditId, 'TV_Series__c')) {
+    //     System.debug('getTVSeriesToEdit called with id: ' + outSeriesToEditId);
 
-            // TV_Series__c recordToEdit = [SELECT ID FROM TV_Series__c WHERE Id =: outSeriesToEditId];
+    //     if(isAllowedIdType(outSeriesToEditId, 'TV_Series__c')) {
+
+    //         // TV_Series__c recordToEdit = [SELECT ID FROM TV_Series__c WHERE Id =: outSeriesToEditId];
     
-            System.debug('passed validation in getTVSeriesToEdit');
+    //         System.debug('passed validation in getTVSeriesToEdit');
 
-            // return recordToEdit;
-            return true;
+    //         // return recordToEdit;
+    //         return true;
 
-        } else {
-            return null;
-        }
+    //     } else {
+    //         return null;
+    //     }
 
-    }
+    // }
 
     // @AuraEnabled
     // public static void updateSeries(String Id){
@@ -54,7 +55,8 @@ public with sharing class DataModifier {
     //         throw new AuraHandledException(e.getMessage());
     //     }
     // }
-
+    
+    @TestVisible
     private static Boolean isAllowedIdType( String inputId, String objectType )
     {
         if ( !String.isBlank( inputId ) && inputId instanceof Id )

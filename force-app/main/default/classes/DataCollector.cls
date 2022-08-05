@@ -10,6 +10,8 @@ public with sharing class DataCollector {
 
     @AuraEnabled
     public static List<TV_Series__c> getSeriesAndSeasons(){
+
+        System.debug('getSeriesAndSeasons called');
         
         List<TV_Series__c> ownerRecords = [SELECT Id, Name, No_of_seasons__c, No_of_episodes__c,
                                              Age_rating__c, TV_Series_Story__c, TVSeries_Logo__c,
@@ -17,11 +19,15 @@ public with sharing class DataCollector {
                                              FROM TV_Series__c
                                              ORDER BY Name];
 
+        System.debug('ownerRecords.size() = ' + ownerRecords);
+
         if(ownerRecords.Size() > 0) {
+            System.debug('if enetered');
             return ownerRecords;  
           } 
           else {
-              return null;
+            System.debug('else enetered');
+            return null;
           }
     }
 
@@ -37,25 +43,17 @@ public with sharing class DataCollector {
     @AuraEnabled
     public static List<TV_Series_Episode__c> getEpisodes(String outSeason){
 
-        System.debug('getEpisodes called');
-        System.debug('outSeason: ' + outSeason);
 
         if(isAllowedIdType(outSeason, 'TV_Series_Season__c')) {
-            System.debug('isAllowedIdType: '+ isAllowedIdType(outSeason, 'TV_Series_Season__c'));
             List<TV_Series_Episode__c> episodes = [SELECT Id, Name, Episode_Story__c, Episode_info__c
                                 FROM TV_Series_Episode__c
                                 WHERE TV_Series_Season__c =: outSeason
                                 ORDER BY Name];
 
-            System.debug('episodes.size(): '+ episodes.size());
 
             if(episodes.Size() > 0) {
-                System.debug('episodes.size() > 0 TRUE');
-                System.debug('episodes includes: ' + episodes);
                 return episodes;  
             } else {
-                System.debug('episodes.size() > 0 FALSE');
-
                 return null;
             }
         } else {
@@ -72,7 +70,7 @@ public with sharing class DataCollector {
     * @param objectType object's api name
     * @return true or false
     */
-
+    @TestVisible
     private static Boolean isAllowedIdType( String inputId, String objectType )
     {
         if ( !String.isBlank( inputId ) && inputId instanceof Id )

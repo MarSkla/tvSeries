@@ -22,6 +22,7 @@ export default class EpisodeListDisplay extends LightningElement {
     _toastMessage
 
     subscribeToMessageChannel() {
+        this.isLoading=true;
         // console.log('this.subscription: '+ this.subscription);
         if (!this.subscription) {
             this.subscription = subscribe(
@@ -31,11 +32,14 @@ export default class EpisodeListDisplay extends LightningElement {
                 { scope: APPLICATION_SCOPE }
             );
         }
+        this.isLoading=false;
     }
 
     unsubscribeToMessageChannel() {
+        this.isLoading=true;
         unsubscribe(this.subscription);
         this.subscription = null;
+        this.isLoading=false;
     }
 
     handleMessage(message) {
@@ -43,20 +47,26 @@ export default class EpisodeListDisplay extends LightningElement {
         // console.log('message: ' + message.recordId);
         this.recordId = message.recordId;
         // console.log('subscription: recordId = ' + this.recordId);
-        this.isLoding=false;
         this.retrieveEpisodes();
+        this.isLoding=false;
 
     }
 
     connectedCallback() {
+        this.isLoding=true;
+
         // console.log('callback stat');
         this.subscribeToMessageChannel();
         // console.log('callback end');
         // console.log('this.recordId: ' + this.recordId);
+        this.isLoding=false;
+
     }
 
     disconnectedCallback() {
+        this.isLoading=true;
         this.unsubscribeToMessageChannel();
+        this.isLoading=false;
     }
 
     retrieveEpisodes(){
@@ -84,11 +94,13 @@ export default class EpisodeListDisplay extends LightningElement {
     }
     
     showToast() {
+        this.isLoading=true;
         const event = new ShowToastEvent({
             title: this._toastTitle,
             message: this._toastMessage,
             variant: 'warning',
         });
         this.dispatchEvent(event);
+        this.isLoading=false;
     }
 }
