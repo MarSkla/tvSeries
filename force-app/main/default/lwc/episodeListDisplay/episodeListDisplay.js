@@ -12,7 +12,10 @@ export default class EpisodeListDisplay extends LightningElement {
     @wire(MessageContext)
     messageContext;
 
-    @api isLoding = false;
+    @api areEpisodesLoading = false;
+    @api isMessageMOdalOpen = false;
+    @api modalMessage;
+    @api areEpisodesVisible = false;
 
     episodes
 
@@ -21,8 +24,26 @@ export default class EpisodeListDisplay extends LightningElement {
     _toastTitle
     _toastMessage
 
+
+    connectedCallback() {
+        console.log('connectedCallback() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // this.areEpisodesLoading=true;
+        console.log('connectedCallback() change areEpisodesLoading = ', this.areEpisodesLoading);
+
+
+        // console.log('callback stat');
+        this.subscribeToMessageChannel();
+        // console.log('callback end');
+        // console.log('this.recordId: ' + this.recordId);
+        // this.areEpisodesLoading=false;
+
+    }
+
     subscribeToMessageChannel() {
-        this.isLoading=true;
+        console.log('subscribeToMessageChannel() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // this.areEpisodesLoading=true;
+        console.log('subscribeToMessageChannel() change areEpisodesLoading = ', this.areEpisodesLoading);
+        
         // console.log('this.subscription: '+ this.subscription);
         if (!this.subscription) {
             this.subscription = subscribe(
@@ -32,45 +53,28 @@ export default class EpisodeListDisplay extends LightningElement {
                 { scope: APPLICATION_SCOPE }
             );
         }
-        this.isLoading=false;
-    }
-
-    unsubscribeToMessageChannel() {
-        this.isLoading=true;
-        unsubscribe(this.subscription);
-        this.subscription = null;
-        this.isLoading=false;
+        // this.areEpisodesLoading=false;
     }
 
     handleMessage(message) {
-        this.isLoding=true;
+        console.log('handleMessage() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        this.areEpisodesLoading=true;
+        console.log('handleMessage() change areEpisodesLoading = ', this.areEpisodesLoading);
+
         // console.log('message: ' + message.recordId);
         this.recordId = message.recordId;
         // console.log('subscription: recordId = ' + this.recordId);
+        // this.areEpisodesLoading=false;
         this.retrieveEpisodes();
-        this.isLoding=false;
 
     }
 
-    connectedCallback() {
-        this.isLoding=true;
-
-        // console.log('callback stat');
-        this.subscribeToMessageChannel();
-        // console.log('callback end');
-        // console.log('this.recordId: ' + this.recordId);
-        this.isLoding=false;
-
-    }
-
-    disconnectedCallback() {
-        this.isLoading=true;
-        this.unsubscribeToMessageChannel();
-        this.isLoading=false;
-    }
 
     retrieveEpisodes(){
-        this.isLoding = true;
+        console.log('retrieveEpisodes() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        this.areEpisodesLoading = true;
+        // console.log('retrieveEpisodes() change areEpisodesLoading = ', this.areEpisodesLoading);
+
 
         // console.log('episodeId: ' + episodeId);
         // console.log('retrieveEpisodes - this.recordId = ' + this.recordId);
@@ -79,28 +83,77 @@ export default class EpisodeListDisplay extends LightningElement {
 
         getEpisodes({outSeason : this.recordId})
         .then(result => {
-            this.episodes=result
-            // console.log('episodes.size() = ', this.episodes.size())
-            this.isLoding = false;
-        })
-        .catch(error => {
-            {this._toastTitle = 'Ups'}
-            {this._toastMessage = 'There are noe episodes for this season'};
-            this.showToast();
-            this.isLoding = false;
+            if(result != null){
+                this.episodes=result
+                console.log('episodes.length = ', this.episodes.length)
+                this.areEpisodesLoading = false;
+                console.log('areEpisodesLoading = ', this.areEpisodesLoading);
 
+            } else {
+                this.modalMessage = 'No episodes for this season'
+                this.isMessageMOdalOpen = true;
+                // this.areEpisodesLoading = false;
+            }
+            // this.areEpisodesLoading = true;
+            // console.log('result = ', result);
+            // this.areEpisodesLoading = false;
         })
+        // .catch(error => {            
+            
+        //     // {this._toastTitle = 'Ups'}
+        //     // {this._toastMessage = 'There are noe episodes for this season'};
+        //     // this.showToast();
+        //     // this.areEpisodesLoading = false;
+            
+        // })
+        // console.log('retrieveEpisodes() exit areEpisodesLoading = ', this.areEpisodesLoading);
+        // this.areEpisodesLoading = false
+        // console.log('retrieveEpisodes() exit change areEpisodesLoading = ', this.areEpisodesLoading);
+        console.log('retrieveEpisodes() end');
+
         // , 1000);        
     }
-    
-    showToast() {
-        this.isLoading=true;
-        const event = new ShowToastEvent({
-            title: this._toastTitle,
-            message: this._toastMessage,
-            variant: 'warning',
-        });
-        this.dispatchEvent(event);
-        this.isLoading=false;
+
+    unsubscribeToMessageChannel() {
+        console.log('unsubscribeToMessageChannel() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        this.areEpisodesLoading=true;
+        console.log('unsubscribeToMessageChannel() change areEpisodesLoading = ', this.areEpisodesLoading);
+
+
+        unsubscribe(this.subscription);
+        this.subscription = null;
+        this.areEpisodesLoading=false;
     }
+
+
+    closeMessageModal(){
+        this.isMessageMOdalOpen = false;
+    }
+
+    handleEpisodesLoading() {
+        this.areEpisodesVisible=true; 
+        console.log('handleDetailLoading() exit areEpisodesLoading = ', this.areEpisodesLoading);
+        this.areEpisodesLoading = false
+        console.log('handleDetailLoading() exit change areEpisodesLoading = ', this.areEpisodesLoading);
+     }
+
+
+
+    // disconnectedCallback() {
+    //     this.areEpisodesLoading=true;
+    //     this.unsubscribeToMessageChannel();
+    //     this.areEpisodesLoading=false;
+    // }
+
+    
+    // showToast() {
+    //     this.areEpisodesLoading=true;
+    //     const event = new ShowToastEvent({
+    //         title: this._toastTitle,
+    //         message: this._toastMessage,
+    //         variant: 'warning',
+    //     });
+    //     this.dispatchEvent(event);
+    //     this.areEpisodesLoading=false;
+    // }
 }
