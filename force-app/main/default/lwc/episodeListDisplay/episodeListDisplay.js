@@ -90,9 +90,9 @@ export default class EpisodeListDisplay extends LightningElement {
                 // console.log('areEpisodesLoading = ', this.areEpisodesLoading);
 
             } else {
-                // this.modalMessage = 'No episodes for this season'
+                this.modalMessage = 'No episodes for this season'
                 this.isMessageMOdalOpen = true;
-                // this.areEpisodesLoading = false;
+                this.areEpisodesLoading = false;
             }
             // this.areEpisodesLoading = true;
             // console.log('result = ', result);
