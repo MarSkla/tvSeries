@@ -47,17 +47,17 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     _toastMessage;
     _tastvariant;
 
-    constructor(){
-        super();
+    connectedCallback(){
+        // super();
         this.isLoading = true;
         getSeriesAndSeasons()
         .then(result => {
             this.Series = result
         })
-        .catch(error => {
-            this.modalMessage = 'There is no data for this app'
-            this.isMessageMOdalOpen = true;
-        })
+        // .catch(error => {
+        //     this.modalMessage = 'There is no data for this app'
+        //     this.isMessageMOdalOpen = true;
+        // })
         this.isLoading = false; 
     }
 
