@@ -62,7 +62,7 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     }
 
     seasonSelect(event){
-        this.isLoading = true
+        // this.isLoading = true
 
         // console.log('seasonSelection event handler works')
         // const id = event.currentTarget.dataset.id;
@@ -119,16 +119,16 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         console.log('this.isReviewModalOpen: ' + this.isMEditModalOpen);
     }
 
-    addEpisode(event){
-        this.isLoading=true;
-        const id = event.currentTarget.dataset.id
-        console.log('passed show.id: ' + id);
-        this.isAddEpisodeModalOpen = true;
-        this.seasonToAddEpisode = id;
-        console.log('seasonToAddEpisode' + this.seasonToAddEpisode);
-        console.log(('in Series variable: ' + this.Series));
-        this.isLoading=false;
-    }
+    // addEpisode(event){
+    //     this.isLoading=true;
+    //     const id = event.currentTarget.dataset.id
+    //     console.log('passed show.id: ' + id);
+    //     this.isAddEpisodeModalOpen = true;
+    //     this.seasonToAddEpisode = id;
+    //     console.log('seasonToAddEpisode' + this.seasonToAddEpisode);
+    //     console.log(('in Series variable: ' + this.Series));
+    //     this.isLoading=false;
+    // }
 
     handleCancelinEditModal(event){
         this.isLoading=true;
@@ -140,10 +140,13 @@ export default class LightningExampleAccordionBasic extends LightningElement {
                 field.reset();
             });
         }
-        this.closeEditModal();
+        // this.closeEditModal();
         this.isLoading=false;
-        this.modalMessage = 'Action cancelled'
-        this.isMessageMOdalOpen = true;
+        this.isMEditModalOpen = false;       
+
+
+        // this.modalMessage = 'Action cancelled'
+        // this.isMessageMOdalOpen = true;
      }
 
 
@@ -167,10 +170,12 @@ export default class LightningExampleAccordionBasic extends LightningElement {
                 field.reset();
             });
         }
-        this.closeAddReviewModal();
+        // this.closeAddReviewModal();
         this.isLoading=false;
-        this.modalMessage = 'Action cancelled'
-        this.isMessageMOdalOpen = true;
+        this.isReviewModalOpen = false;
+
+        // this.modalMessage = 'Action cancelled'
+        // this.isMessageMOdalOpen = true;
      }
 
 
