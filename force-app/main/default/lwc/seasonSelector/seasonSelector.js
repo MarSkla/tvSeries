@@ -111,7 +111,7 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         console.log('this.isReviewModalOpen: ' + this.isReviewModalOpen);
         const seriesId = event.currentTarget.dataset.id;
         // this.retrievedRecordToEdit = event.currentTarget.dataset.id;
-        console.log('editRecord ID obtained: ' + seriesId);
+        console.log('reviewRecord ID obtained: ' + seriesId);
         this.retrievedRecordToAddReview = seriesId;
         console.log('retrievedRecordToAddReview: ' + this.retrievedRecordToAddReview);
         this.isReviewModalOpen = true;

@@ -26,9 +26,9 @@ export default class EpisodeListDisplay extends LightningElement {
 
 
     connectedCallback() {
-        console.log('connectedCallback() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('connectedCallback() enter areEpisodesLoading = ', this.areEpisodesLoading);
         // this.areEpisodesLoading=true;
-        console.log('connectedCallback() change areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('connectedCallback() change areEpisodesLoading = ', this.areEpisodesLoading);
 
 
         // console.log('callback stat');
@@ -40,9 +40,9 @@ export default class EpisodeListDisplay extends LightningElement {
     }
 
     subscribeToMessageChannel() {
-        console.log('subscribeToMessageChannel() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('subscribeToMessageChannel() enter areEpisodesLoading = ', this.areEpisodesLoading);
         // this.areEpisodesLoading=true;
-        console.log('subscribeToMessageChannel() change areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('subscribeToMessageChannel() change areEpisodesLoading = ', this.areEpisodesLoading);
         
         // console.log('this.subscription: '+ this.subscription);
         if (!this.subscription) {
@@ -57,9 +57,9 @@ export default class EpisodeListDisplay extends LightningElement {
     }
 
     handleMessage(message) {
-        console.log('handleMessage() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('handleMessage() enter areEpisodesLoading = ', this.areEpisodesLoading);
         this.areEpisodesLoading=true;
-        console.log('handleMessage() change areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('handleMessage() change areEpisodesLoading = ', this.areEpisodesLoading);
 
         // console.log('message: ' + message.recordId);
         this.recordId = message.recordId;
@@ -71,7 +71,7 @@ export default class EpisodeListDisplay extends LightningElement {
 
 
     retrieveEpisodes(){
-        console.log('retrieveEpisodes() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('retrieveEpisodes() enter areEpisodesLoading = ', this.areEpisodesLoading);
         this.areEpisodesLoading = true;
         // console.log('retrieveEpisodes() change areEpisodesLoading = ', this.areEpisodesLoading);
 
@@ -85,12 +85,12 @@ export default class EpisodeListDisplay extends LightningElement {
         .then(result => {
             if(result != null){
                 this.episodes=result
-                console.log('episodes.length = ', this.episodes.length)
+                // console.log('episodes.length = ', this.episodes.length)
                 this.areEpisodesLoading = false;
-                console.log('areEpisodesLoading = ', this.areEpisodesLoading);
+                // console.log('areEpisodesLoading = ', this.areEpisodesLoading);
 
             } else {
-                this.modalMessage = 'No episodes for this season'
+                // this.modalMessage = 'No episodes for this season'
                 this.isMessageMOdalOpen = true;
                 // this.areEpisodesLoading = false;
             }
@@ -109,15 +109,15 @@ export default class EpisodeListDisplay extends LightningElement {
         // console.log('retrieveEpisodes() exit areEpisodesLoading = ', this.areEpisodesLoading);
         // this.areEpisodesLoading = false
         // console.log('retrieveEpisodes() exit change areEpisodesLoading = ', this.areEpisodesLoading);
-        console.log('retrieveEpisodes() end');
+        // console.log('retrieveEpisodes() end');
 
         // , 1000);        
     }
 
     unsubscribeToMessageChannel() {
-        console.log('unsubscribeToMessageChannel() enter areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('unsubscribeToMessageChannel() enter areEpisodesLoading = ', this.areEpisodesLoading);
         this.areEpisodesLoading=true;
-        console.log('unsubscribeToMessageChannel() change areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('unsubscribeToMessageChannel() change areEpisodesLoading = ', this.areEpisodesLoading);
 
 
         unsubscribe(this.subscription);
@@ -132,9 +132,9 @@ export default class EpisodeListDisplay extends LightningElement {
 
     handleEpisodesLoading() {
         this.areEpisodesVisible=true; 
-        console.log('handleDetailLoading() exit areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('handleDetailLoading() exit areEpisodesLoading = ', this.areEpisodesLoading);
         this.areEpisodesLoading = false
-        console.log('handleDetailLoading() exit change areEpisodesLoading = ', this.areEpisodesLoading);
+        // console.log('handleDetailLoading() exit change areEpisodesLoading = ', this.areEpisodesLoading);
      }
 
 
