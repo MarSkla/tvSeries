@@ -1,13 +1,14 @@
 import { publish, MessageContext} from 'lightning/messageService';
 import SEASON_SELECTION from '@salesforce/messageChannel/seasonSelection__c';
 
-import { updateRecord } from 'lightning/uiRecordApi'; //to refresh record view
+// import { updateRecord } from 'lightning/uiRecordApi'; //to refresh record view
 
 import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSeriesAndSeasons from '@salesforce/apex/DataCollector.getSeriesAndSeasons';
 import removeTvSeries from '@salesforce/apex/DataModifier.removeTvSeries';
 // import getTVSeriesToEdit from '@salesforce/apex/DataModifier.getTVSeriesToEdit';
+import {subscribe, unsubscribe, onError, setDebugFlag, isEmpEnabled} from 'lightning/empApi';
 
 
 export default class LightningExampleAccordionBasic extends LightningElement {
@@ -47,6 +48,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
     _toastMessage;
     _tastvariant;
 
+    channelName = '/data/ChangeEvents'
+
     connectedCallback(){
         // super();
         this.isLoading = true;
@@ -60,6 +63,8 @@ export default class LightningExampleAccordionBasic extends LightningElement {
         // })
         this.isLoading = false; 
     }
+
+    
 
     seasonSelect(event){
         // this.isLoading = true
