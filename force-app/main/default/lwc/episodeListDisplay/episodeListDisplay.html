@@ -1,0 +1,47 @@
+<template >
+
+    <template if:true={areEpisodesLoading}>
+        <div>
+            <lightning-spinner alternative-text="loading..." variant="inverse"></lightning-spinner>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>   
+
+    <lightning-card onload={handleEpisodesLoading}>
+        <lightning-accordion allow-multiple-sections-open class="slds-scrollable_y" style="height:35rem">
+            <lightning-accordion-section for:each={episodes} for:item="episode" key={episode.Id} label={episode.Name}>
+                <div>
+                    <lightning-record-view-form
+                        record-id={episode.Id}
+                        object-api-name="TV_Series_Episode__c">
+                        <lightning-output-field field-name="Episode_info__c"></lightning-output-field>
+                    </lightning-record-view-form>
+                </div>
+    
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
+
+    <section if:true={isMessageMOdalOpen}>
+
+        <section  role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+              <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeMessageModal}>
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg> -->
+                <!-- <span class="slds-assistive-text">Cancel and close</span> -->
+              </button>
+              <!-- <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Message Variable</h1>
+              </div> -->
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p id="modal-canceled" style="text-align : center">{modalMessage}</p>
+              </div>
+              <button class="slds-button slds-button_brand" onclick={closeMessageModal}>Ok</button>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </section>
+    
+</template>

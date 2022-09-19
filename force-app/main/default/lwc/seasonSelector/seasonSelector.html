@@ -1,0 +1,196 @@
+<template>
+
+    <template if:true={isLoading}>
+        <div>
+            <lightning-spinner alternative-text="loading data..." variant="inverse"></lightning-spinner>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+    <section if:true={isMEditModalOpen} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Update TV Series Data</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-2">
+                <lightning-record-edit-form
+                        object-api-name="TV_Series__c"
+                        record-id={retrievedRecordToEdit}>
+                        <!-- <label class="slds-form-element__label slds-align_absolute-center" style="min-width: max-content" for="checkbox-interested"></label> -->
+                        <lightning-output-field id="modal-series-output-name" class="slds-form-element__label" field-name="Name"></lightning-output-field>
+                        <!-- <lightning-input-field id="modal-series-name" class="slds-form-element__label" field-name="Name"></lightning-input-field> -->
+                        <lightning-input-field id="modal-series-story" class="slds-form-element__label" field-name="TV_Series_Story__c"></lightning-input-field>
+                        <lightning-input-field id="modal-series-url" class="slds-form-element__label" field-name="Series_Trailer__c"></lightning-input-field>
+                        <!-- <lightning-input-field id="modal-series-review" class="slds-form-element__label" field-name="Series_review__c"></lightning-input-field> -->
+                        <!-- <lightning-input-field id="modal-series-logo" class="slds-form-element__label" field-name="TVSeries_Logo__c"></lightning-input-field> -->
+                        <div class="slds-col slds-size_full slds-align_absolute-center slds-var-p-around_medium slds-border_bottom">
+                        <lightning-button variant="nautral" type="submit" label="Cancel" onclick={handleCancelinEditModal}></lightning-button>
+                        <lightning-button variant="success" type="submit" label="Update" onclick={closeEditModal}></lightning-button>
+                        </div>
+                </lightning-record-edit-form>
+            </div>
+        </div>
+    </section>
+
+    <section if:true={isReviewModalOpen} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-04" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-04" class="slds-modal__title slds-hyphenate">Add TV Series Review</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-4">
+                <lightning-record-edit-form
+                        object-api-name="TV_Series__c"
+                        record-id={retrievedRecordToAddReview}>
+                        <lightning-output-field id="modal-series-output-name-2" class="slds-form-element__label" field-name="Name"></lightning-output-field>
+                        <lightning-input-field id="modal-series-review" class="slds-form-element__label" field-name="Series_review__c"></lightning-input-field>
+                        <div class="slds-col slds-size_full slds-align_absolute-center slds-var-p-around_medium slds-border_bottom">
+                        <lightning-button variant="nautral" type="cancel" label="Cancel" onclick={handleCancelinAddReviewModal}></lightning-button>
+                        <lightning-button variant="success" type="submit" label="Add Review" onclick={closeAddReviewModal}></lightning-button>
+                        </div>
+                </lightning-record-edit-form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ADD EPISODE start -->
+
+    <!-- <section if:true={isAddEpisodeModalOpen} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Add Episode</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-3">
+                <lightning-record-form  
+                    object-api-name="TV_Series_Episode__c"
+                    layout-type="Full" 
+                    mode="edit">
+                    <lightning-output-field field-name="TV Series"></lightning-output-field>
+                </lightning-record-form> -->
+                <!-- <lightning-record-edit-form
+                        object-api-name="TV_Series_Episode__c"
+                        record-id={retrievedRecordToEdit}>
+                        <lightning-output-field id="modal-series-output-name" class="slds-form-element__label" field-name="Name"></lightning-output-field>
+                        <lightning-input-field id="modal-series-name" class="slds-form-element__label" field-name="Name"></lightning-input-field>
+                        <lightning-input-field id="modal-series-story" class="slds-form-element__label" field-name="TV_Series_Story__c"></lightning-input-field>
+                        <lightning-input-field id="modal-series-review" class="slds-form-element__label" field-name="Series_review__c"></lightning-input-field>
+                        <div class="slds-col slds-size_full slds-align_absolute-center slds-var-p-around_medium slds-border_bottom">
+                            <lightning-button variant="nautral" type="submit" label="Cancel" onclick={handleCancel}></lightning-button>
+                            <lightning-button variant="success" type="submit" label="Add" onclick={closeEditModal}></lightning-button>
+                        </div>
+                </lightning-record-edit-form> -->
+            <!-- </div>
+        </div>
+    </section> -->
+
+
+    <!-- ADD EPISODE end -->
+
+    <!-- modal -->
+    <!-- <section if:false={isWelcomeModalClosed} role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Are you ready...? :-)</h1>
+            </div>
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <img src={carLogo}>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={closeWelcomeModal}>YESSS</button>
+            </div>
+        </div>
+    </section> -->
+    <!-- modal -->
+    <lightning-card>
+        <lightning-accordion allow-multiple-sections-open class="slds-scrollable_y" style="height:35rem">
+            <lightning-accordion-section for:each={Series} for:item="show" key={show.Id} label={show.Name}>
+                <lightning-button-menu slot="actions"
+                                      alternative-text="Show menu"
+                                      icon-size="x-small"
+                                      menu-alignment="right">
+                    <lightning-menu-item label="Edit TV Series" data-id={show.Id} onclick={editRecord} ></lightning-menu-item>
+                    <lightning-menu-item label="Add TV Series review" data-id={show.Id} onclick={addSeriesReview} ></lightning-menu-item>
+                    <lightning-menu-item label="Remove TV Series" data-id={show.Id} onclick={deleteRecord}></lightning-menu-item>
+                </lightning-button-menu>
+                <!-- sezony -->
+                <div>
+                    <!-- <lightning-accordion>  -->
+                        <lightning-accordion-section label="Available seasons">
+                            <!-- <p><b>{season.Name}</b></p> -->
+                            <!-- <lightning-layout-item > -->
+                                <lightning-button for:each={show.TV_Series_Seasons__r} for:item="season" key={season.Id} 
+                                                class="slds-var-p-around_medium slds-float_left"
+                                                data-id={season.Id}
+                                                variant="brand-outline"
+                                                label={season.Name}
+                                                onclick={seasonSelect}>
+                                </lightning-button>
+                                <!-- <lightning-button-menu slot="actions"
+                                                        alternative-text="Show menu"
+                                                        icon-size="x-small"
+                                                        menu-alignment="right">
+    
+                                    <lightning-menu-item label="Add Episode" data-id={show.Id} onclick={addEpisode}></lightning-menu-item>
+                                </lightning-button-menu> -->
+                            <!-- </lightning-layout-item> -->
+                        </lightning-accordion-section>
+                        <!-- <p><b>Testowy wpis</b></p> -->
+                    <!-- </lightning-accordion> -->
+                </div>
+                <!-- sezony -->
+                <div >
+                    <lightning-record-view-form 
+                    record-id={show.Id}
+                    object-api-name="TV_Series__c"
+                    >
+                    <lightning-accordion-section label="Basic info">
+                    <div class="slds-col">
+                        <lightning-output-field field-name="No_of_seasons__c"></lightning-output-field>
+                        <lightning-output-field field-name="No_of_episodes__c"></lightning-output-field>
+                        <lightning-output-field field-name="Age_rating__c"></lightning-output-field>
+                        <lightning-output-field field-name="Series_Trailer__c"></lightning-output-field>
+                    </div>
+                    </lightning-accordion-section>
+                    <lightning-accordion-section label="Something to read">
+                    <div class="slds-col slds-border_bottom">
+                        <lightning-output-field field-name="TV_Series_Story__c"></lightning-output-field>
+                        <lightning-output-field field-name="Series_review__c"></lightning-output-field>
+                    </div>
+                    </lightning-accordion-section> 
+                    <div class="slds-col">
+                        <lightning-output-field field-name="TVSeries_Logo__c" variant="label-hidden"></lightning-output-field>
+                    </div>
+                    </lightning-record-view-form>
+                </div>
+    
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
+
+
+    <!-- messages -->
+    <section if:true={isMessageMOdalOpen}>
+
+        <section  role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+              <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeMessageModal}>
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg> -->
+                <!-- <span class="slds-assistive-text">Cancel and close</span> -->
+              <!-- </button> -->
+              <!-- <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Message Variable</h1>
+              </div> -->
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p id="modal-canceled" style="text-align : center">{modalMessage}</p>
+              </div>
+              <button class="slds-button slds-button_brand" onclick={closeMessageModal}>Ok</button>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </section>
+
+    <!-- messages -->
+
+</template>
